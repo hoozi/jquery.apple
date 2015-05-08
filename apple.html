@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>apple</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	*{margin:0;padding:0}
+	body{font:12px/1.5 'Lucida Grande','Trebuchet MS','Hiragino Sans GB','Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;}
+	.clearfix:after{content:".";clear:both;visibility:hidden;height:0;}
+	.img-wrap{width:714px;overflow:hidden;}
+	.img-list{position:relative;left:0;height:95px;text-align:center}
+	.img-list li{width:92px;float:left;display:inline-block;margin:0 5px;position:relative;}
+	.img-list li a,
+	.img-list li img,
+	.img-list li span{display:block;}
+	.img-list li span{padding-top:10px;}
+	.control{text-align:center;}
+</style>
+</head>
+<body>
+<div class="img-wrap">
+	<ul class="img-list clearfix">
+		<li>
+			<a href="###">
+				<img src="images/imac.png" alt="">
+				<span>Mac</span>
+			</a>
+		</li>
+		<li>
+			<a href="###">
+				<img src="images/imac.png" alt="">
+				<span>Mac</span>
+			</a>
+		</li>
+
+	</ul>
+	<div class="control">
+		
+	</div>
+</div>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+var auto = false;
+var imgContainer = $(".img-list");
+var imgBox = imgContainer.find("li");
+var control = $(".control");
+var firstWidth = imgBox.first().outerWidth();
+var pageNum = 7;
+var width = auto || firstWidth+10;
+var totalPage = Math.ceil(imgBox.length/pageNum);
+function init() {
+	var len = [];
+	var pageHtml = "";
+	imgContainer.width(width*imgBox.length);
+	for(var i = 0, len = totalPage; i<len; i++) {
+		pageHtml+='<input type="button" value="'+(i+1)+'"/>';
+	}
+	control.html(pageHtml);
+}
+init()
+</script>
+</body>
+</html>
