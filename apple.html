@@ -11,59 +11,135 @@
 	*{margin:0;padding:0}
 	body{font:12px/1.5 'Lucida Grande','Trebuchet MS','Hiragino Sans GB','Segoe UI Light','Segoe UI','Microsoft Jhenghei','微软雅黑',sans-serif;}
 	.clearfix:after{content:".";clear:both;visibility:hidden;height:0;}
-	.img-wrap{width:714px;overflow:hidden;}
-	.img-list{position:relative;left:0;height:95px;text-align:center}
-	.img-list li{width:92px;float:left;display:inline-block;margin:0 5px;position:relative;}
-	.img-list li a,
-	.img-list li img,
-	.img-list li span{display:block;}
-	.img-list li span{padding-top:10px;}
-	.control{text-align:center;}
+	.img-wrap{margin:150px auto;width:714px;position:relative;overflow:hidden;}
+	.img-wrap .img-list{height:100px;}
+	.img-wrap .img-list .img-item-wrap{float:left;width:714px;top:0;text-align:center}
+	.img-wrap .img-list .img-item-wrap .img-item{display:inline-block;}
+	.img-wrap .img-list .img-item-wrap .img-item a,
+	.img-wrap .img-list .img-item-wrap .img-item a img,
+	.img-wrap .img-list .img-item-wrap .img-item a span{display:block}
 </style>
 </head>
 <body>
 <div class="img-wrap">
-	<ul class="img-list clearfix">
-		<li>
-			<a href="###">
-				<img src="images/imac.png" alt="">
-				<span>Mac</span>
-			</a>
-		</li>
-		<li>
-			<a href="###">
-				<img src="images/imac.png" alt="">
-				<span>Mac</span>
-			</a>
-		</li>
+	<div class="img-list clearfix">
 
-	</ul>
-	<div class="control">
-		
+
+		<div class='img-item-wrap'>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>	
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+		</div>
+		<div class='img-item-wrap'>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+			<div class="img-item">
+				<a href="###">
+					<img src="images/imac.png" alt="">
+					<span>Mac电脑</span>
+				</a>
+			</div>
+		</div>
+
 	</div>
 </div>
-
+<div class="control">
+	<input type="button" value="1"> <input type="button" value="2">
+</div>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="jquery.easing.1.3.js"></script>
 <script type="text/javascript">
-var auto = false;
-var imgContainer = $(".img-list");
-var imgBox = imgContainer.find("li");
-var control = $(".control");
-var firstWidth = imgBox.first().outerWidth();
-var pageNum = 7;
-var width = auto || firstWidth+10;
-var totalPage = Math.ceil(imgBox.length/pageNum);
-function init() {
-	var len = [];
-	var pageHtml = "";
-	imgContainer.width(width*imgBox.length);
-	for(var i = 0, len = totalPage; i<len; i++) {
-		pageHtml+='<input type="button" value="'+(i+1)+'"/>';
-	}
-	control.html(pageHtml);
+var container = $(".img-wrap");
+var img_container = container.find(".img-list");
+var img_item_wrap = img_container.find(".img-item-wrap");
+var img_item = img_container.find(".img-item");
+var per_page = 7;
+var total_page = Math.ceil(img_item.length/per_page);
+_init();
+_set_move(0)
+function _init(){
+	_set_width();
+	_set_position();
 }
-init()
+function _set_width(len) {
+	var len = img_item_wrap.length;
+	img_container.width(len*714)
+}
+function _set_position(){
+	img_item_wrap.css({
+		position:"absolute",
+		left:714
+	})
+}
+function _set_move(now) {
+	img_item_wrap.eq(now).stop()
+	.animate({
+		left:0
+	},300,function(){
+
+	})
+	
+	img_item_wrap.eq(now-1)
+	.animate({
+		left:-714
+	},300)
+	
+}
+function _even(){
+	var _this = $(this);
+	var index = _this.index();
+	_set_move(index)
+}
+$(".control").on("click.apple", "input", _even)
 </script>
 </body>
 </html>
