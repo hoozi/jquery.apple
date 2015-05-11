@@ -170,6 +170,7 @@ var img_item = img_container.find(".img-item");
 var per_page = 7;
 var total_page = Math.ceil(img_item.length/per_page);
 var old = 0;
+var position = [];
 _init();
 _set_move(0,-1);
 function _init(){
@@ -184,7 +185,8 @@ function _set_position(){
 	img_item_wrap.css({
 		position:"absolute",
 		left:714
-	})
+	});
+	
 }
 function _set_move(now,dir) {
 	img_item_wrap.eq(old).stop()
@@ -210,7 +212,9 @@ function _set_move(now,dir) {
 	.stop()
 	.animate({
 		left:0
-	},300);	
+	},300,function(){
+
+	});	
 	old = now;
 }
 function _even(){
