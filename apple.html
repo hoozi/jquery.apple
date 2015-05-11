@@ -190,10 +190,12 @@ function _set_position(){
 	
 }
 function _set_move(now,dir) {
-	img_item_wrap.eq(old).stop()
-	.animate({
-		left:dir*714
-	},300);
+	
+		img_item_wrap.eq(old).stop()
+		.animate({
+			left:dir*714
+		},300);
+
 	
 	if(now>0&&now!=img_item_wrap.length-1) {
 		img_item_wrap.eq(now-1).css({
@@ -208,6 +210,13 @@ function _set_move(now,dir) {
 			left:100,
 			opacity:0		
 		})		
+	} else if(now==0) {
+		img_item_wrap.eq(now+1).css({
+			left:714
+		}).find("a").css({
+			left:100,
+			opacity:0		
+		})
 	} else if(now==img_item_wrap.length-1) {
 		for(var i=0;i<now;i++) {
 			img_item_wrap.eq(i).css({
@@ -216,33 +225,34 @@ function _set_move(now,dir) {
 				left:-100,
 				opacity:0
 			})
-
 		}
-	}
+	}	
 	img_item_wrap.eq(now)
 	.stop()
 	.animate({
 		left:0
-	},10,function(){
-		var speed = 0;
+	},100,function(){
+		var speed = 100;
 		var _item = $(this).find(".img-item");
 		if(dir===-1) {
 			for(var i=0;i<_item.length;i++) {
 				var _a = _item.eq(i).find("a");
 				speed+=80
-				_a.animate({
+				_a.delay(i*100).animate({
 					left:0,
 					opacity:1
 				},speed)
 			}
 		} else {
+			var item_index = 0;
 			for(var i=_item.length-1;i>=0;i--) {
 				var _a = _item.eq(i).find("a");
 				speed+=80
-				_a.animate({
+				_a.delay(item_index*100).animate({
 					left:0,
 					opacity:1
-				},speed)
+				},speed);
+				item_index++;
 			}
 		}
 	});	
